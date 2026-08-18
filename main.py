@@ -14,7 +14,7 @@ total_ml_bebidos = 0
 vezes_bebeu = 0
 
 print(f"Você definiu sua meta de beber {meta_ml} ml de água por hora.")
-print("Água! iniciado com sucesso. Você receberá uma notificação a cada hora para se lembrar de beber água.")
+print("Água! iniciado com sucesso. Você receberá uma notificação a cada hora para se lembrar de beber água.\nBoa sorte!🌟")
 
 def mostrar_notificacao():
     global total_ml_bebidos, vezes_bebeu, meta_ml
@@ -26,14 +26,14 @@ def mostrar_notificacao():
     janela.attributes("-topmost", True)
 
     titulo = ctk.CTkLabel(
-        janela, text="Hora do gole!", font=("Helvetica", 18, "bold"),
+        janela, text="✨ Hora do Gole! ✨", font=("Helvetica", 18, "bold"),
         text_color="#EB84CA"
     )
     titulo.pack(pady=(15, 5))
 
     mensagem = ctk.CTkLabel(
         janela,
-        text=f"De gole em gole a pele fica hidratada!\n Pausa para {meta_ml} ml de água.",
+        text=f"💧 De gole em gole a pele fica hidratada!\n🌸 Pausa para {meta_ml} ml de água.",
         font=("Helvetica", 12),
     )
     mensagem.pack(pady=5)
@@ -50,7 +50,7 @@ def mostrar_notificacao():
 
     botao = ctk.CTkButton(
         janela,
-        text="Bebi!",
+        text="Bebi! 💖",
         command=lambda: confirmar(janela),  # Envia a janela para a função
         fg_color="#EB84CA",
         hover_color="#DB59CE",
