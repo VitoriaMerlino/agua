@@ -1,5 +1,9 @@
+import sys
 import time
 import customtkinter as ctk
+from PIL import Image
+import pystray
+import os
 
 ctk.set_appearance_mode("system") #aparência de acordo com o sistema operacional
 
@@ -67,7 +71,7 @@ def mostrar_notificacao():
     janela.mainloop()
 
 def criar_tela_inicial():
-    global metal_ml
+    global meta_ml
     #cria a janela de configuração da meta
     janela_config = ctk.CTk()
     janela_config.title("Água! - Configuração de Meta")
@@ -122,6 +126,20 @@ def criar_tela_inicial():
     )
     botao_iniciar.pack(pady=15)
     janela_config.mainloop()
+
+#função pra sair do app
+def sair_app(icon, item):
+    icon.stop() #para o ícone na bandeja
+    print("Água! encerrado com sucesso. Até a próxima! 🌟")
+    os._exit(0)  # Encerra o programa de forma limpa
+
+#cria menu ao clicar com o botão direito no ícone da bandeja
+image_icone = Image.open("icone.ico")
+menu = pystray.Menu(
+    pystray.MenuItem("Sair do Água!", sair_app)
+)
+icone_bandeja = pystray.Icon("Água!", image_icone, "Água!", menu)
+icone_bandeja.run_detached()  # Executa o ícone da bandeja em segundo plano
 
 #primeiro a janela de configuração da meta
 criar_tela_inicial()
