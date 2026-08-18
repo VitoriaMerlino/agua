@@ -3,18 +3,13 @@ import customtkinter as ctk
 
 ctk.set_appearance_mode("system") #aparência de acordo com o sistema operacional
 
-#boas vindas e personalização do usuário
-print("Bem-vindo ao Água! Vamos manter você hidratado.")
-
-meta_input = input("Digite a quantidade de água que você deseja beber por hora (padrão: 100 ml): ")
-meta_ml = int(meta_input) if meta_input.strip() != "" else 100 #dose padrão
-
+meta_ml = 100  # valor padrão
 #contagem do sucesso do usuário
 total_ml_bebidos = 0
 vezes_bebeu = 0
 
-print(f"Você definiu sua meta de beber {meta_ml} ml de água por hora.")
-print("Água! iniciado com sucesso. Você receberá uma notificação a cada hora para se lembrar de beber água.\nBoa sorte!🌟")
+#print(f"Você definiu sua meta de beber {meta_ml} ml de água por hora.")
+#print("Água! iniciado com sucesso. Você receberá uma notificação a cada hora para se lembrar de beber água.\nBoa sorte!🌟")
 
 def mostrar_notificacao():
     global total_ml_bebidos, vezes_bebeu, meta_ml
@@ -38,6 +33,17 @@ def mostrar_notificacao():
     )
     mensagem.pack(pady=5)
 
+    progresso = ctk.CTkLabel(
+        janela,
+        text=(
+            f"📊 Hoje você já bebeu: {total_ml_bebidos} ml ({vezes_bebeu}"
+            " pausas)"
+        ),
+        font=("Helvetica", 11, "italic"),
+        text_color="#6B7280",
+    )
+    progresso.pack(pady=(0, 10))
+
     def confirmar(janela_alvo):
         global total_ml_bebidos, vezes_bebeu, meta_ml
         total_ml_bebidos += meta_ml
@@ -60,6 +66,66 @@ def mostrar_notificacao():
 
     janela.mainloop()
 
+def criar_tela_inicial():
+    global metal_ml
+    #cria a janela de configuração da meta
+    janela_config = ctk.CTk()
+    janela_config.title("Água! - Configuração de Meta")
+    janela_config.geometry("380x280")
+    janela_config.iconbitmap("icone.ico") 
+    #textos informativos
+    titulo =ctk.CTkLabel(
+      janela_config,
+      text = "Bem-vindo ao Água! 💧",
+      font = ("Helvetica", 20, "bold"),  
+    )
+    titulo.pack(pady=(20, 5))
+
+    subtitulo = ctk.CTkLabel(
+        janela_config,
+        text = "Defina sua meta de consumo de água por hora (ml):",
+        font = ("Helvetica", 13),
+        )
+    subtitulo.pack(pady=5)
+
+    #campo de entrada para a meta
+    entrada_meta = ctk.CTkEntry(
+        janela_config,
+        placeholder_text="Ex: 100",
+        width=200,
+        height=30,
+        border_width=2,
+        corner_radius=10,
+        justify="center",
+    )
+    entrada_meta.pack(pady=15)
+
+    #ação do botão de confirmação
+    def salvar_e_iniciar():
+        global meta_ml
+        valor_digitado = entrada_meta.get().strip()
+
+        if valor_digitado.isdigit() and int(valor_digitado) > 0:
+            meta_ml = int(valor_digitado)
+        else:
+            meta_ml = 100  # valor padrão caso a entrada seja inválida
+        janela_config.destroy()
+
+    #botão de iniciar
+    botao_iniciar = ctk.CTkButton(
+        janela_config,
+        text="Iniciar 💧",
+        command=salvar_e_iniciar,
+        fg_color="#EB84CA",
+        hover_color="#DB59CE",
+        corner_radius=20,
+    )
+    botao_iniciar.pack(pady=15)
+    janela_config.mainloop()
+
+#primeiro a janela de configuração da meta
+criar_tela_inicial()
+#agora se inicia o loop
 INTERVALO_SEGUNDOS = 3600  # 1 hora em segundos
 while True:
     time.sleep(INTERVALO_SEGUNDOS)
