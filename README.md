@@ -60,3 +60,6 @@ Durante o desenvolvimento do **Água!**, explorei diversos conceitos práticos d
 - **⚙️ Resolução de Desafios Técnicos:** Lidar com comportamentos assíncronos (threads), gerenciamento correto do encerramento de processos com `os._exit()` e tratamento seguro no carregamento de ativos (`icone.ico`).
 - **📦 Empacotamento para Produção:** Transformação do script Python em um arquivo executável standalone (`.exe`) com `PyInstaller` e gerenciamento de dependências via `requirements.txt`.
 - **🛠️ Controle de Versão:** Boas práticas com `Git` e `GitHub` (commits semânticos, uso do `.gitignore` para pastas de build e criação de documentação).
+
+
+Projeto desenvolvido com foco no aprendizado de Python e GUIs, contando com o apoio de Inteligência Artificial como assistente de código e mentora de arquitetura.
